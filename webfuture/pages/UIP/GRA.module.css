@@ -1,0 +1,61 @@
+.controlPanel {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .row {
+    display: flex;
+    width: 100%;
+    margin-top:50px;
+    margin-bottom: 50px;
+    margin-left: 10px;
+  }
+  
+  .button {
+    border-radius: 10px;
+    width: 25%;
+    height: 50px;
+    margin-right: 7%;
+    margin-left: 5%;
+  }
+  
+  .refreshButton {
+    width: 20%;
+    background-color: #FFBCC1;
+    margin-right: 0;
+  }
+  
+  .saveButton {
+    background-color: #FFB896;
+    margin-left: 21%;
+  }
+  
+  .exportButton {
+    background-color: #FFE7AE;
+    margin-right: 0;
+  }
+  
+  .wireframeButton {
+    background-color: #8BB4A0;
+    margin-left: 21%;
+  }
+  
+  .contentButton {
+    background-color: #C0D8B3;
+    margin-right: 0;
+  }
+
+  .label {
+    line-height: 50px;
+    margin-left: 5%;
+    font-size: 20px;
+    width: 25%;
+  }
+  
+  .select {
+    width: 30%;
+    height: 50px;
+    margin-right: 7%;
+    margin-left: 3%;
+  }
+  
