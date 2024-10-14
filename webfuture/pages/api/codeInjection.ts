@@ -142,18 +142,23 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       const originalStyles = getStyleContent(document);
       const updateStyles = getStyleContent(updateDocument);
 
-      // Parsing and updating when originalStyles and updateStyles are not empty
-      if (originalStyles.trim() !== '' && updateStyles.trim() !== '') {
-        const originalStyleAst = parseStyles(originalStyles);
-        const updateStyleAst = parseStyles(updateStyles);
+      // Parsing and updating when updateStyles are not empty
+      if (updateStyles.trim() !== '') {
+        let updatedStyles = updateStyles;
 
-        const updatedStyleAst = updateOriginalStyles(originalStyleAst, updateStyleAst);
+        // Parsing and updating when originalStyles are not empty
+        if (originalStyles.trim() !== '') {
+          const originalStyleAst = parseStyles(originalStyles);
+          const updateStyleAst = parseStyles(updateStyles);
 
-        // Converting the updated AST back to a CSS string
-        const updatedStyles = cssParser.stringify(updatedStyleAst);
+          const updatedStyleAst = updateOriginalStyles(originalStyleAst, updateStyleAst);
+
+          // Converting the updated AST back to a CSS string
+          updatedStyles = cssParser.stringify(updatedStyleAst);
+        }
 
         // Update the <style> element of the original document
-        const styleElement = document.querySelector('style');
+        let styleElement = document.querySelector('style');
         if (styleElement) {
           styleElement.textContent = updatedStyles;
         } else {
@@ -163,7 +168,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           document.head.appendChild(newStyleElement);
         }
       }
-
+      
       /* JS */
       const removeScriptDataOpt = (document: Document) => {
         const modifyScripts = document.querySelectorAll('script[data-opt="modify"]');
